@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ListeJeuxAmeliorer.Services;
 
 namespace listeJeuxAmeliorer
 {
@@ -22,6 +24,8 @@ namespace listeJeuxAmeliorer
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        private IGameRepository gameRepository = new GameRepository();
+
         public ObservableCollection<Game> ListGame = new ObservableCollection<Game>();
         public ObservableCollection<string> ListConsole { get; set; } = new ObservableCollection<string>();
         public Game currentGame;
@@ -38,7 +42,6 @@ namespace listeJeuxAmeliorer
         }
 
 
-
         public MainWindow()
         {
             ListConsole.Add("PS4");
@@ -46,50 +49,11 @@ namespace listeJeuxAmeliorer
             ListConsole.Add("PC");
             ListConsole.Add("NES");
 
-            ListGame.Add(new Game()
+            var games = gameRepository.FindAll();
+            foreach (var game in games)
             {
-                Title = "Kill the goat",
-                Description = "You need to kill as many goat as possible!!",
-                Editor = "Ubisoft",
-                Year = 2010,
-                Console = "PS4",
-                Rating = 5,
-                PicturePath = "Image/chevre1.jpg"
-            });
-
-            ListGame.Add(new Game()
-            {
-                Title = "Slab the goat",
-                Description = "You need to slab as many goat as possible!!",
-                Editor = "Epic Game",
-                Year = 2015,
-                Console = "Xbox3",
-                Rating = 9,
-                PicturePath = "Image/chevre2.jpg"
-            });
-
-            ListGame.Add(new Game()
-            {
-                Title = "Run from the goat",
-                Description = "You need to run away of the goat as possible!!",
-                Editor = "Runtime",
-                Year = 2005,
-                Console = "PC",
-                Rating = 7,
-                PicturePath = "Image/chevre3.jpg"
-            });
-
-            ListGame.Add(new Game()
-            {
-                Title = "Capture the goat",
-                Description = "You need to capture as many goat as possible!!",
-                Editor = "Gamecon",
-                Year = 2000,
-                Console = "NES",
-                Rating = 4,
-                PicturePath = "Image/chevre4.jpg"
-            });
-
+	            ListGame.Add(game);
+            }
 
             CurrentGame = ListGame[0];
 
