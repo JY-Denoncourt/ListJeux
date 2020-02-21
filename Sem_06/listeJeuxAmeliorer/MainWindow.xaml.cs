@@ -26,6 +26,7 @@ namespace listeJeuxAmeliorer
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private IGameRepository gameRepository = new GameRepository();
+        private IConsoleRepository consoleRepository = new ConsoleRepository();
 
         public ObservableCollection<Game> ListGame = new ObservableCollection<Game>();
         public ObservableCollection<string> ListConsole { get; set; } = new ObservableCollection<string>();
@@ -45,11 +46,12 @@ namespace listeJeuxAmeliorer
 
         public MainWindow()
         {
-            ListConsole.Add("PS4");
-            ListConsole.Add("Xbox3");
-            ListConsole.Add("PC");
-            ListConsole.Add("NES");
-
+	        var consoles = consoleRepository.FindAll();
+	        foreach (var console in consoles)
+	        {
+		        ListConsole.Add(console);
+            }
+            
             var games = gameRepository.FindAll();
             foreach (var game in games)
             {
