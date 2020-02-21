@@ -8,8 +8,4 @@
     <RootNamespace>ListeJeuxAmeliorer</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>

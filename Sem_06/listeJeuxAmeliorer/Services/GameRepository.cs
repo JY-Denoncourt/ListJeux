@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Documents;
 using listeJeuxAmeliorer;
+using ListeJeuxAmeliorer.Models;
 
 namespace ListeJeuxAmeliorer.Services
 {
